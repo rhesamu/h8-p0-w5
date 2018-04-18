@@ -30,16 +30,12 @@ Algoritma:
 
 function dronePosition (grid) {
   // Code here
-  var x = 0;
-  var y = 0;
-  var string = x + ', ' + y;
 
   for (var i = 0; i < grid.length; i++) {
-    for (var j = 0; j < grid[i].length; j++) {
-      if (grid[i][j] === '*') {
-        x = i;
-        y = j;
-        return string
+    for (var j = 0; j < grid[i][0].length; j++) {
+      // console.log(grid[i][0])
+      if (grid[i][0][j] === '*') {
+        return `${i}, ${j}`
       }
     }
   }
@@ -65,3 +61,27 @@ console.log(dronePosition([
   ['###'],
   ['###']
 ])); // No drone
+
+// console.log(dronePosition([
+//   ['', '', ''],
+//   ['', '', ''],
+//   ['', '', '*']
+// ])); // 2, 2
+//
+// console.log(dronePosition([
+//   ['', '', ''],
+//   ['', '*', ''],
+//   ['', '', '']
+// ])); // 1, 1
+//
+// console.log(dronePosition([
+//   ['', '', '*'],
+//   ['', '', ''],
+//   ['', '', '']
+// ])); // 0, 2
+//
+// console.log(dronePosition([
+//   ['', '', ''],
+//   ['', '', ''],
+//   ['', '', '']
+// ])); // No drone

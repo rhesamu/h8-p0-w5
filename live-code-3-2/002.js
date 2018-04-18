@@ -57,19 +57,33 @@ function howManyGame(minutes, gamesLength){
     return 0;
   }
 
+  // gamesLength.sort(function (a, b) {return a > b});
+  // [150, 120, 50, 30, 100] -> [30, 50, 100, 120, 150]
+
+  for (var i = 0; i < gamesLength.length; i++) {
+    for (var j = i+1; j < gamesLength.length; j++) {
+      if (gamesLength[i] > gamesLength[j]) {
+        var temp = gamesLength[i];
+        gamesLength[i] = gamesLength[j];
+        gamesLength[j] = temp;
+      }
+    }
+  }
+
+  console.log(gamesLength);
+
   var counter = 0;
 
   for (var i = 0; i < gamesLength.length; i++) {
-    minutes -= gamesLength[i];
-
-    if (minutes - gamesLength[i] !== 0) {
+    if (minutes - gamesLength[i] >= 0) {
       counter++;
     }
+    minutes -= gamesLength[i];
   }
 
   return counter;
 }
-
+//
 console.log(howManyGame(300, [150, 120, 50, 30, 100])); // 4
 console.log(howManyGame(1000, [200, 200, 300, 100, 200, 1000])); // 5
 console.log(howManyGame(400, [75, 100, 20, 30])); // 4

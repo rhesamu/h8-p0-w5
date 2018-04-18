@@ -27,40 +27,52 @@ Contoh lain ada di test case
 
 */
 
-function virusPercentage (input) {
+function virusPercentage(input) {
   // Code here
   var stars = 0;
   var hashes = 0;
   var atSymbol = 0;
   var dollar = 0;
 
-  var output = [];
-  var starString = String(stars / input.length * 100) + '% *';
-  var hashString = String(hashes / input.length * 100) + '% #';
-  var atSymbolString = String(atSymbol / input.length * 100) + '% @';
-  var dollarString = String(dollar / input.length * 100) + '% $';
+  var symbols = {};
 
   for (var i = 0; i < input.length; i++) {
     if(input[i] === '*') {
       stars++;
+      symbols['*'] = stars;
     } else if (input[i] === '#') {
       hashes++;
+      symbols['#'] = hashes;
     } else if (input[i] === '@') {
       atSymbol++;
+      symbols['@'] = atSymbol;
     } else if (input[i] === '$') {
       dollar++;
+      symbols['$'] = dollar;
     }
   }
 
+  //console.log(symbols); // -> {'*': 3, '#': 3, etc}
 
-
-  if (stars !== 0 && hashes !== 0 && atSymbol !== 0 && dollar !== 0) {
-    output = [starString, hashString, atSymbolString, dollarString];
-    var str = output.join(', ')
-
+  var sortable = [];
+  for (var key in symbols) {
+    //console.log(key) -> stars, hashes, etc (the key)
+    //console.log(symbols[key]) -> 2, 6, etc (the value)
+    symbols[key] = (symbols[key] / input.length * 100) + '% ' + key;
+    sortable.push(symbols[key]);
   }
+  // console.log(symbols); // -> {'*': '25% *', etc }
 
-  return str
+  sortable.sort(function(a, b) {
+    return a.slice(0, a.indexOf('%')) < b.slice(0, b.indexOf('%'))
+  });
+
+  // console.log(sortable);
+
+  var str = sortable.join(', ')
+  // console.log(str)
+
+  return str;
 }
 
 console.log(virusPercentage('**#*##')); // 50% *, 50% #
@@ -68,3 +80,4 @@ console.log(virusPercentage('**######')); // 75% #, 25% *
 console.log(virusPercentage('**##@')); // 40% *, 40% #, 20% @
 console.log(virusPercentage('@')); // 100% @
 console.log(virusPercentage('#$*@')); // 25% #, 25% $, 25% *, 25% @
+console.log(virusPercentage('@#*$'));

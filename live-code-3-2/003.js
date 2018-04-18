@@ -36,16 +36,12 @@ function productCategories(products) {
   var objects = {}
 
   for (var i = 0; i < products.length; i++) {
-    objects[i] = {}
-
-    // for (var j = 0; j < products[i].length; j++) {
-    //   objects[i].product = products[i][0];
-    //   objects[i].price = products[i][1];
-    //   objects[i].category = products[i][2];
-    // }
-
-    for(var j = 0; j < products[i].length; j++) {
-      objects[i][products[i][2]] = products[i][0]
+    if (objects[products[i][2]]) {
+      objects[products[i][2]].push(products[i][0])
+    }
+    // if it's not
+    else {
+      objects[products[i][2]] = [products[i][0]]
     }
   }
 
