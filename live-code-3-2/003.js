@@ -32,10 +32,10 @@ Output yang diharapkan adalah Object Literal seperti contoh berikut:
 
 function productCategories(products) {
   // Code here
-
   var objects = {}
 
   for (var i = 0; i < products.length; i++) {
+    // if key already exists
     if (objects[products[i][2]]) {
       objects[products[i][2]].push(products[i][0])
     }
