@@ -13,9 +13,15 @@ function highestScore (students) {
     }
     else {
       if (top[students[i].class].score < students[i].score) {
-        top[students[i].class]['name'] = students[j].name;
-        top[students[i].class]['score'] = students[j].score;
+        top[students[i].class]['name'] = students[i].name;
+        top[students[i].class]['score'] = students[i].score;
       }
+      // for (var j = i+1; j < students.length; j++) {
+      //   if (top[students[j].class]['score'] > top[students[i].class]['score']) {
+      //     top[students[i].class]['name'] = students[j].name;
+      //     top[students[i].class]['score'] = students[j].score;
+      //   }
+      // }
     }
   }
 
@@ -36,7 +42,7 @@ console.log(highestScore([
   },
   {
     name: 'Sergei',
-    score: 74,
+    score: 100,
     class: 'foxes'
   },
   {
